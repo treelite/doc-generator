@@ -1,6 +1,7 @@
 package gen
 
-func Gen(filePath string) []byte {
-	doc := parse(filePath)
+func Generate(filePath string, data interface{}) []byte {
+	template := createTemplate(filePath, data)
+	doc := parse(template)
 	return render(doc)
 }

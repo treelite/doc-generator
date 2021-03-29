@@ -1,8 +1,10 @@
 <document namespace="pdf">
   <table>
-    <tr>
-      <td colspan="2">This is a question</td>
-      <td background-color="#CCC" text-align="center" font-color="#FFF">Yes</td>
-    </tr>
+    {{range .Items}}
+      <tr>
+        <td colspan="2">{{.Question}}</td>
+        <td background-color="{{.BgColor}}" text-align="center" font-color="#FFF">{{.Answer}}</td>
+      </tr>
+    {{end}}
   </table>
 </document>

@@ -1,9 +1,8 @@
 package gen
 
 import (
-	"bytes"
 	"fmt"
-	"os"
+	"io"
 	"strconv"
 
 	"golang.org/x/net/html"
@@ -45,16 +44,17 @@ func parseNode(node *html.Node) *ElementNode {
 	return res
 }
 
-func parse(filePath string) *ElementNode {
-	file, _ := os.ReadFile(filePath)
-	raw, _ := html.Parse(bytes.NewReader(file))
+func parse(template io.Reader) *ElementNode {
+	raw, _ := html.Parse(template)
 
 	var process func(*html.Node, *ElementNode)
 	var doc *ElementNode
 
 	process = func(node *html.Node, parentElement *ElementNode) {
-		if node.Type == html.TextNode && parentElement != nil {
-			parentElement.Data = node.Data
+		if node.Type == html.TextNode {
+			if node.Data != "" && parentElement != nil {
+				parentElement.Data = node.Data
+			}
 		} else {
 			var ele *ElementNode
 			if node.Type == html.ElementNode {
