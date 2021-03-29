@@ -1,0 +1,8 @@
+<document namespace="pdf">
+  <table>
+    <tr>
+      <td colspan="2">This is a question</td>
+      <td background-color="#CCC" text-align="center" font-color="#FFF">Yes</td>
+    </tr>
+  </table>
+</document>
